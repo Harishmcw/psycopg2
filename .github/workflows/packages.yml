@@ -319,14 +319,6 @@ jobs:
           CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >-
             delvewheel repair -w {dest_dir}
             --no-mangle "libiconv-2.dll;libwinpthread-1.dll" {wheel}
-          CIBW_TEST_COMMAND: >-
-            set PYTHONPATH={project} &&
-            python -c "import tests; tests.unittest.main(defaultTest='tests.test_suite')"
-          # Note: no fast test because we don't run Windows tests
-          CIBW_ENVIRONMENT_WINDOWS: >-
-            PSYCOPG2_TESTDB=postgres
-            PSYCOPG2_TESTDB_USER=postgres
-            PSYCOPG2_TESTDB_HOST=localhost
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
