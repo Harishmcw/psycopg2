@@ -3,7 +3,7 @@
 pip install delvewheel wheel
 
 if "%PROCESSOR_ARCHITECTURE%"=="ARM64" (
-    set VCPKG_TRIPLET=arm64-windows-release
+    set VCPKG_TRIPLET=arm64-windows
 ) else (
     set VCPKG_TRIPLET=x64-windows-release
 )

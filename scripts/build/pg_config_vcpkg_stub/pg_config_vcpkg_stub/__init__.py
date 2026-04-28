@@ -7,7 +7,7 @@ make it work with vcpkg.
 
 You will need install `vcpkg`, set `VCPKG_ROOT` env, and run:
   `vcpkg install libpq:x64-windows-release`   (on x64)
-  `vcpkg install libpq:arm64-windows-release` (on ARM64)
+  `vcpkg install libpq:arm64-windows` (on ARM64)
 before using this script.
 """
 
@@ -28,7 +28,7 @@ def _main() -> None:
         raise ScriptError("this script should only be used on Windows x64 or ARM64")
 
     machine = platform.machine()  # "AMD64" or "ARM64"
-    triplet = "arm64-windows-release" if machine == "ARM64" else "x64-windows-release"
+    triplet = "arm64-windows" if machine == "ARM64" else "x64-windows-release"
 
     vcpkg_root = os.environ.get(
         "VCPKG_ROOT", os.environ.get("VCPKG_INSTALLATION_ROOT", "")
