@@ -282,16 +282,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
-      - name: Setup PostgreSQL
-        uses: ikalnytskyi/action-setup-postgres@v8
-        with:
-          username: postgres
-          password: password
-          database: postgres
-          port: 5432
-          postgres-version: "16"
-        id: postgres
-
       - name: Export GitHub Actions cache environment variables
         uses: actions/github-script@v8
         with:
