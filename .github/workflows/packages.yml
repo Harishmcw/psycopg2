@@ -282,12 +282,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
-      - name: Start PostgreSQL service for test
+      - name: Install and start PostgreSQL
+        shell: powershell
         run: |
+          choco install postgresql --params '/Password:password' -y
           $PgSvc = Get-Service "postgresql*"
           Set-Service $PgSvc.Name -StartupType manual
           $PgSvc.Start()
-        shell: powershell
+          # Wait for it to be ready
+          Start-Sleep -Seconds 5
+
 
       - name: Export GitHub Actions cache environment variables
         uses: actions/github-script@v8
