@@ -270,7 +270,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: [win_arm64]
-        pyver: [cp311, cp312, cp313, cp314]
+        pyver: [cp313]
         package_name: [psycopg2, psycopg2-binary]
 
     defaults:
