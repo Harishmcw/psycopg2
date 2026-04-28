@@ -289,8 +289,8 @@ jobs:
             const path = require('path')
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-            core.addPath(path.join(process.env.VCPKG_INSTALLATION_ROOT, 'installed/arm64-windows-release/lib'));
-            core.addPath(path.join(process.env.VCPKG_INSTALLATION_ROOT, 'installed/arm64-windows-release/bin'));
+            core.addPath(path.join(process.env.VCPKG_INSTALLATION_ROOT, 'installed/arm64-windows/lib'));
+            core.addPath(path.join(process.env.VCPKG_INSTALLATION_ROOT, 'installed/arm64-windows/bin'));
 
       - name: Create the binary package source tree
         run: >-
