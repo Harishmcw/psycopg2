@@ -5,8 +5,10 @@ We use vcpkg in github actions to build psycopg-binary.
 This is a stub to work as `pg_config --libdir` or `pg_config --includedir` to
 make it work with vcpkg.
 
-You will need install `vcpkg`, set `VCPKG_ROOT` env, and run `vcpkg install
-libpq:x64-windows-release` before using this script.
+You will need install `vcpkg`, set `VCPKG_ROOT` env, and run:
+  `vcpkg install libpq:x64-windows-release`   (on x64)
+  `vcpkg install libpq:arm64-windows-release` (on ARM64)
+before using this script.
 """
 
 import os
@@ -21,16 +23,19 @@ class ScriptError(Exception):
 
 
 def _main() -> None:
-    # only x64-windows
-    if not (sys.platform == "win32" and platform.machine() == "AMD64"):
-        raise ScriptError("this script should only be used in x64-windows")
+    # only windows (x64 or ARM64)
+    if sys.platform != "win32" or platform.machine() not in ("AMD64", "ARM64"):
+        raise ScriptError("this script should only be used on Windows x64 or ARM64")
+
+    machine = platform.machine()  # "AMD64" or "ARM64"
+    triplet = "arm64-windows-release" if machine == "ARM64" else "x64-windows-release"
 
     vcpkg_root = os.environ.get(
         "VCPKG_ROOT", os.environ.get("VCPKG_INSTALLATION_ROOT", "")
     )
     if not vcpkg_root:
         raise ScriptError("VCPKG_ROOT/VCPKG_INSTALLATION_ROOT env var not specified")
-    vcpkg_platform_root = (Path(vcpkg_root) / "installed/x64-windows-release").resolve()
+    vcpkg_platform_root = (Path(vcpkg_root) / f"installed/{triplet}").resolve()
 
     args = parse_cmdline()
 
